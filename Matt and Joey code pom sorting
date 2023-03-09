@@ -1,0 +1,114 @@
+#include <kipr/wombat.h>
+int l = 1750;
+int r = 750;
+int b = 2000;
+int n = 1000;
+//4400 on black line
+// 3727 off the black line
+void linefollowing(int counter);
+void moveServos(int servo1, int servo2, int startPosition1, int finalPosition1, int startPosition2, int finalPosition2){
+  set_servo_position(servo1, startPosition1);
+    set_servo_position(servo2, startPosition2);
+
+  if (startPosition1 < finalPosition1 && startPosition2 < finalPosition2){
+    while (startPosition1 < finalPosition1){
+       startPosition1++;
+        startPosition2++;
+       set_servo_position(servo1, startPosition1);
+        set_servo_position(servo2, startPosition2);
+       msleep(1);
+     }
+  ao();
+  }
+  else if (startPosition1 < finalPosition1 && startPosition2 > finalPosition2){
+    while (startPosition1 < finalPosition1){
+       startPosition1++;
+        startPosition2--;
+       set_servo_position(servo1, startPosition1);
+        set_servo_position(servo2, startPosition2);
+       msleep(1);
+        
+    }}
+       else if (startPosition1 > finalPosition1 && startPosition2 < finalPosition2){
+    while (startPosition1 < finalPosition1){
+       startPosition1--;
+        startPosition2++;
+       set_servo_position(servo1, startPosition1);
+        set_servo_position(servo2, startPosition2);
+       msleep(1);
+    }}
+          else{
+        
+        
+    while (startPosition1 > finalPosition1){
+      startPosition1--;
+        startPosition2--;
+      set_servo_position(servo1, startPosition1);
+        set_servo_position(servo2, startPosition2);
+      msleep(1);
+    }}
+  ao();
+  }
+
+void linefollowing(int counter){
+  while(counter < 100)
+  {
+      
+      if(analog(2) > 4000)
+      {
+          motor(0,100);
+          motor(3, 50);
+          msleep(10);
+          counter++;
+      }
+      if(analog(2) <= 4000)
+      {
+          motor(3,100);
+          motor(0, 50);
+          msleep(10);
+          counter++;
+      }
+  }
+    
+}
+
+
+int main()
+{
+    
+
+    enable_servos();
+    linefollowing(10);
+//bottom start 2000
+    //end 1000
+ 
+            set_servo_position(0, l);
+            set_servo_position(1, b);
+    
+    msleep(1000);
+    
+   //moveServos(1,0,l,r);
+    while(analog(0) < 2700)
+    {
+        motor(0,100);
+    motor(3,100);
+        msleep(10);
+    }
+    motor(0,100);
+    motor(3,100);
+        msleep(100);
+    ao();
+    
+    
+
+    msleep(2000);
+        
+    set_servo_position(0, r);
+            set_servo_position(1, n );
+    msleep(1000);
+    
+    set_servo_position(0, l);
+            set_servo_position(1, b);
+return 0;
+}
+
