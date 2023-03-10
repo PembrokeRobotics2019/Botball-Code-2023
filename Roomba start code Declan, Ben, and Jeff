@@ -1,0 +1,20 @@
+#include <kipr/wombat.h>
+
+int main()
+{
+     create_connect();
+    enable_servos();
+    set_servo_position(0, 165);
+    create_drive_direct(47,49);
+    msleep(10000);
+    create_drive_direct(47,-49);
+    msleep(3000);
+    create_drive_direct(47,49);
+    msleep(10000);
+    create_drive_direct(-47,49);
+    msleep(3000);
+    set_servo_position(0, 800);
+    motor (0, 50);
+    msleep (8000);
+    return 0;
+}
