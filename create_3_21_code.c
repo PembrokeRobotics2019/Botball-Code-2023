@@ -1,3 +1,5 @@
+#include <kipr/wombat.h>
+
 int main()
 {
     create_connect();
